@@ -1,0 +1,56 @@
+
+/*2.  Implementa el control de acceso al área restringida de un programa. Se debe pedir un nombre de usuario y una contraseña. Si el usuario introduce los datos correctamente, el programa dirá “Ha accedido al área restringida”. El usuario tendrá un máximo de 3 oportunidades. Si se agotan las oportunidades el programa dirá “Lo siento, no tiene acceso al área restringida”. Los nombres
+de usuario con sus correspondientes contraseñas deben estar almacenados en una estructura de la clase HashMap.
+*/
+
+
+package usuario_Contraseña;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+
+public class usuario_contraseña {
+static Scanner sc=new Scanner(System.in);
+
+static String usuario1="centro";
+static String contraseña1="tetuan";
+
+	
+		
+	
+	public static void main(String[] args) {
+		int contador=0;
+		HashMap <String,String>lista=new HashMap<String,String>();
+		lista.put(usuario1,contraseña1);
+		Set<Map.Entry<String, String>> entries=lista.entrySet();
+		
+		 String value=lista.get(usuario1);
+		System.out.println(value);
+		Set<String> key=lista.keySet() ;
+		String clave=key.toString();
+		
+		clave=clave.substring(1,7);
+		System.out.println(clave);
+		while(contador!=3) {
+			System.out.println("Introduce usuario");
+			String usuario=sc.next();
+			System.out.println("Introduce contraseña");
+			String contraseña=sc.next();
+			
+			if((clave.equals(usuario))&&(value.equals(contraseña))) {
+				   
+		    	System.out.println("Ha accedido al área restringida");
+		    	System.exit(0);
+		    }else{
+		    	
+		    	System.out.println("Lo siento, no tiene acceso al área restringida");
+		    }
+	       
+			contador++;
+		}
+	}
+
+}
