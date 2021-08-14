@@ -1,0 +1,107 @@
+
+
+COLECCIONES
+CLAVE, VALOR 
+_____________
+
+
+
+INTERFAZ MAP
+_____________
+
+▸ No es un subtipo de Collection (List y Set
+sí que lo son).
+
+▸ Cada elemento tiene estructura clave,
+valor.
+
+▸ La clave sirve para acceder directamente
+al valor.
+
+▸ Las implementaciones son HashMap,
+TreeMap y LinkedHashMap. Las
+consideraciones son análogas a Set. 
+
+
+
+OPERACIONES CON MAP
+___________________
+
+
+Nombre              Uso
+________________________________________________
+clear Elimina todos los elementos del diccionario.
+
+containsKey Comprueba si una clave está presente en el diccionario.
+
+containsValue Comprueba si un valor está presente en el diccionario.
+
+get Devuelve el valor asociado a una clave.
+
+isEmpty Verifica si el conjunto está vacío
+
+keySet Devuelve un Set con todas las claves.
+
+put Permite insertar un par clave, valor
+
+remove Elimina un elemento del conjunto
+
+size Devuelve el número de elementos de la lista
+
+values Devuelve un Collection con los valores
+
+
+
+
+EJEMPLO:
+________
+
+
+/**
+ * 
+ */
+package map;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
+import modelo.Persona;
+
+/**
+ * @author Openwebinars
+ *
+ */
+public class EjemploMap {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		
+		Map<String, Persona> agenda = new HashMap<>();
+		
+		//Insertamos los pares clave, valor
+		agenda.put("954000001", new Persona("12345678A", "Pepe", "Perez", LocalDate.of(1990, 1, 2)));
+		agenda.put("954000002",new Persona("23456789B", "Juan", "Martínez", LocalDate.of(1991, 2, 3)));
+		agenda.put("954000003",new Persona("34567890C", "Ana", "Ramírez", LocalDate.of(1992, 3, 4)));
+		agenda.put("954000004",new Persona("45678901D", "María", "López", LocalDate.of(1993, 4, 5)));
+		
+		//Si insertamos un elemento con la misma clave, lo sustituimos
+		agenda.put("954000004",new Persona("56789012E", "Martín", "García", LocalDate.of(1990, 12, 15)));
+		
+		//La forma más normal de recorrer un Map es tomar su conjunto de claves, iterar por ellas, y
+		//para cada una de ellas, obtener el valor.
+		for(String key : agenda.keySet())
+			System.out.printf("%s %s %n", key, agenda.get(key));
+		
+		
+
+
+	}
+
+}
+
+
+
