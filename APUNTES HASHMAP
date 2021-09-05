@@ -1,0 +1,141 @@
+
+HASHMAP
+_______
+
+HASHMAP SE CREA EN EL MAIN:
+
+HashMap<KeyType,ValueType> map = new HashMap<>();
+
+Ejemplo:
+HashMap<String,String> UsuarioContraseña=new HashMap<>();
+
+Es como un diccionario, formado por una clave y un valor.
+Para poder obtener el valor es necesario primero saber la clave.
+
+MÉTODOS:
+________
+
+PUT: introducir datos
+
+Ejemplo:
+UsuarioContraseña.put(usuario, contraseña);
+
+REMOVE:borrar datos
+lista.remove(emp);
+
+TOSTRING ()	Devuelve una representación de cadena del mapa.
+
+KEYSET() Devuelve los valores clave del hashMap
+
+ISEMPTY() dEVUELVE BOOLEANO QUE INDICA SI EL HASHMAP ESTÁ VACÍO
+
+GET (clave de objeto)	Devuelve el valor de la clave especificada en el mapa. Devuelve nulo si no hay mapeo
+
+ENTRYSET ()	Devuelve una vista establecida del mapeo del mapa.
+
+HASHCODE ()	Devuelve el valor del código hash del mapa.
+
+
+
+CÓMO LEER HASHMAP
+__________________
+
+Se puede leer mediante Iterator o forEach.
+
+Iterator:
+__________
+
+Mediante iterator primero se invoca a set Map.Entry para acceder a la vista del mapa y luego ya se crea el iterator y se llama al Map.Entry.
+
+Para leer el mapa entero usaremos el método next();
+Para leer la clave usaremos next.getKey()
+Para leer el valor usaremos next.getValue()
+
+Set<Map.Entry<String, String>> entries=UsuarioContraseña.entrySet();
+
+Ejemplo:
+		Iterator<Map.Entry<String,String>> lista=entries.iterator();
+		
+		//Con iterator Map.Entry obtengo la clave y el valor guardados en el hashMap
+		while(lista.hasNext()) {
+			
+			 Map.Entry<String, String> next=lista.next();
+			 clave=next.getKey();
+			 valor=next.getValue();
+			 System.out.println(clave+valor);
+		}
+ 
+ 
+ FOR-EACH
+ _________
+
+Para poder leer un hashMap a través del bucle mejorado forEach, primero hay que invocar al Set ketSet() para poder tener acceso 
+a las claves del hashMap, ya que para poder leer un hashMap debemos tener acceso a sus claves para poder luego acceder a los valores.
+
+Una vez declarado el set se realizada el for sobre ese set que es la clave.
+Para obtener el valor se usa el método get ( NombreDeLaListaDeHashMap.get(elnombreDelKeySet) ).
+
+  EJEMPLO:
+  
+  HashMap<String,String> eliza= new HashMap<>();
+		
+		eliza.put("hola","hola,¿qué tal?");
+		eliza.put("encantado", "encantado de conocerte yo también");
+		eliza.put("adiós", "adiós, espero volverte a ver pronto");
+		eliza.put("hora", "lo siento,no llevo reloj");
+		eliza.put("nombre", "Mi nombre es Eliza");
+		eliza.put("canta", "lalala");
+		eliza.put("tiempo", "El tiempo es soleado");
+		
+		//Declaramos set para saber el valor de todas las claves
+		Set <String> converUsuario=eliza.keySet();
+    
+    for(String conversacion:converUsuario) {
+				
+			
+				if(usuarioEscribe.equals(conversacion)) {
+					
+					JOptionPane.showMessageDialog(null, eliza.get(usuarioEscribe));
+					if(usuarioEscribe.equals("adiós")) {
+						JOptionPane.showMessageDialog(null, "El sistema se cierra");
+							System.exit(0);
+							}
+					
+						}
+					}
+			JOptionPane.showMessageDialog(null, "Gracias por hablarme");
+				}
+			
+      
+    A través de estos dos bucles podemos acceder tanto al hashMap entero como a las claves o valores y compararlo con variables que escriba el usuario.
+    
+    
+    
+    CONVERTIR UN HASHMAP EN ARRAY
+    _____________________________
+    
+    También convirtiendo el hashMap en array e invocando el método keySet() podemos acceder a los valores del hashMap
+    Aquí vemos un ejemplo:
+    
+    HashMap<String,Integer>lista=new HashMap<String,Integer>();
+		
+		lista.put("David",22);
+		lista.put("Tom", 23);
+		lista.put("Robert",32);
+		lista.put("Alice", 21);
+		
+		String[] nameArr = new String[lista.size()];
+        nameArr = lista.keySet().toArray(nameArr);
+        
+		for(String emp:nameArr) {
+			
+			if (lista.get(emp)<limite) {
+				lista.remove(emp);
+			}
+			
+			}
+			System.out.println(lista);
+		}
+		
+		
+	}
