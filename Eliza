@@ -1,0 +1,103 @@
+
+
+/*realizar una versión del programa Eliza sobre consola
+ * Se pide desarrollar un método que realice una aproximación muy sencilla
+ * a la funcionalidad que proporcionaba Eliza, En concreto el método debe realizar lo siguiente:
+ * 
+ * Recibir frases tecleadas por un humano desde el ordenador(hasta que llegue a 10 el contador)
+ * Comprobar para cada frase que teclea el humano si existen en la misma
+ * una serie de palabras clave.
+ * Responder con un texto por pantalla a cada frase del humano en función de que la misma contuviera
+ * o no una determinada palabra clave.
+ * En la siguiente tabla se resumen las palabras claves posibles y la frase de respuesta del ordena:
+ * 
+ * Palabras clave:      Frase de respuesta:
+ * hola						hola,qué tal?
+ * encantado				encantado de conocerte yo también
+ * adiós 					adiós, espero conocerte
+ * hora						lo siento no llevo reloj
+ * nombre					Mi nombre es Eliza
+ * 
+ * Yo he añadido al ejercicio que se trabaje con JOptionPane dando
+ * opción al sistema de elegir si hablar con Eliza o no, si es no se cierra el sistema.
+ * 
+ * Y si cuando se habla con Eliza se dice adiós Eliza contesta y cierra el sistema.
+ */
+
+
+package colecciones;
+
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
+public class eliza {
+
+static String  usuarioEscribe;
+static int contador=0;
+
+	public static void main(String[] args) {
+		//Declaramos el hashMap e introducimos los valores
+		
+		HashMap<String,String> eliza= new HashMap<>();
+		
+		eliza.put("hola","hola,¿qué tal?");
+		eliza.put("encantado", "encantado de conocerte yo también");
+		eliza.put("adiós", "adiós, espero volverte a ver pronto");
+		eliza.put("hora", "lo siento,no llevo reloj");
+		eliza.put("nombre", "Mi nombre es Eliza");
+		eliza.put("canta", "lalala");
+		eliza.put("tiempo", "El tiempo es soleado");
+		
+		//Declaramos set para saber el valor de todas las claves
+		Set <String> converUsuario=eliza.keySet();
+		
+		
+		
+		
+		
+		
+		
+		JOptionPane.showMessageDialog(null, "Bienvenido al robot Eliza");
+		
+		int respuesta=JOptionPane.showConfirmDialog(null, "Entabla una conversación con tu robot");
+		switch(respuesta) {
+		
+		case(0):
+			JOptionPane.showMessageDialog(null, "Usted va a disfrutar la experiencia de conversar con Eliza");
+			while(contador!=10) {
+			
+			JOptionPane.showMessageDialog(null, "Por favor, hable con Eliza");
+			usuarioEscribe=JOptionPane.showInputDialog("Habla con Elisa");
+			contador++;
+			for(String conversacion:converUsuario) {
+				
+			
+				if(usuarioEscribe.equals(conversacion)) {
+					
+					JOptionPane.showMessageDialog(null, eliza.get(usuarioEscribe));
+					if(usuarioEscribe.equals("adiós")) {
+						JOptionPane.showMessageDialog(null, "El sistema se cierra");
+							System.exit(0);
+							}
+					
+						}
+					}
+			JOptionPane.showMessageDialog(null, "Gracias por hablarme");
+				}
+			
+
+		break;
+		case(1):
+			JOptionPane.showMessageDialog(null, "Quizás más tarde");
+		break;
+		case(2):
+			JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
+			System.exit(0);
+		break;
+		}
+		
+	}
+
+}
