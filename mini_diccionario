@@ -1,0 +1,83 @@
+
+
+
+/*Crea un mini-diccionario español-inglés que contenga, al menos, 10 palabras
+ * con su correspondiente traducción). Utiliza un objeto de la clase
+ * HashMap para almacenar las parejas de palabras.
+ * Realiza un programa que escoja al azar 5 palabras en español del mini-diccionario.
+ * El programa irá pidiendo que el usuario teclee la traducción al inglés de cada una de las palabras
+ * y comprobará si son correctas. Al final, el programa deberá mostrar cuántas respuestas son
+ * válidas y cuántas correctas.
+ */
+
+
+package colecciones;
+
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Set;
+
+public class mini_Diccionario {
+static Scanner sc=new Scanner(System.in);
+static String palabraUsuario;
+static int contador;
+static String traduccionUsuario;
+static int respuestasValidas;
+static int respuestasNovalidas;
+
+	public static void main(String[] args) {
+		HashMap<String,String>diccionario=new HashMap<>();
+		
+		diccionario.put("hola","hello");
+		diccionario.put("mesa", "table");
+		diccionario.put("ventana", "window");
+		diccionario.put("pollo", "chicken");
+		diccionario.put("animales", "animals");
+		diccionario.put("gracias", "thanks");
+		diccionario.put("colores","colors" );
+		diccionario.put("rosa", "pink");
+		diccionario.put("azul", "blue");
+		diccionario.put("rojo", "red");
+		
+		
+		//Creamos un array con la misma longitud que el diccionario
+		String[] mini_diccionario=new String[diccionario.size()];
+		//Pasamos el hashmap a array
+		mini_diccionario=diccionario.keySet().toArray(mini_diccionario);
+		
+		
+		//Invocamos keySet para conseguir los valores de las claves
+		Set <String> palabras=diccionario.keySet();
+		
+		//Usuario introduce palabras en español y programa las traduce, hasta 5 palabras
+		while(contador!=5) {
+			System.out.println("Introduce palabras en español:");
+			palabraUsuario=sc.next();
+		
+			for(String español:palabras) {
+				if(palabraUsuario.equals(español)) {
+					
+					System.out.println("Introduzca la traducción de la palabra");
+					traduccionUsuario=sc.next();
+					if(traduccionUsuario.equals(diccionario.get(palabraUsuario))) {
+						System.out.println("La respuesta es correcta, la traducción es "+diccionario.get(palabraUsuario));
+						respuestasValidas++;
+					}else {
+						System.err.println("La respuesta es incorrecta,la traducción es "+diccionario.get(palabraUsuario));
+						respuestasNovalidas++;
+					}
+					contador++;
+				}
+			}
+		
+		}
+		System.out.println();
+		System.out.println("RECUENTO DE RESPUESTAS CORRECTAS E INCORRECTAS");
+		System.out.println("______________________________________________");
+		
+		System.out.println("Respuestas correctas: "+respuestasValidas);
+		System.out.println("Respuestas incorrectas: "+respuestasNovalidas);
+		
+	}
+
+}
