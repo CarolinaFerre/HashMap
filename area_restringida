@@ -1,0 +1,118 @@
+
+/*Implemento el control de acceso al área restringida del programa
+	 * Se debe pedir un nombre de usuario y contraseña.
+	 * Si el usuario introduce los datos correctamente, el programa dirá
+	 * 'Ha accedido al área restringida". El usuario tendrá un máximo de 
+	 * 3 oportunidades. Si se agotan las oportunidades el programa dirá
+	 * 'Lo siento, no tiene acceso al área restringida'. Los nombres
+	 * de usuario con sus correspondientes contraseñas deben estar almacenados
+	 * en una estructura de la clase HashMap.
+	 */
+	
+package colecciones;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class zona_restringida {
+	static Scanner sc=new Scanner(System.in);
+	
+	//Declaración de variables
+	static String usuario;
+	static String contraseña;
+	static String usuario2;
+	static String contraseña2;
+	static boolean contieneNumeros;
+	static int contador;
+	static String clave;
+	static String valor;
+	
+	static void registro() {
+		System.out.println();
+		System.out.println("REGISTRO:");
+		System.out.println("________");
+		System.out.println();
+		System.out.println("Registra tu usuario");
+		usuario=sc.next();
+		if(usuario.length()<4) {
+			System.out.println("El usuario debe ser mayor de 4 caracteres");
+			System.exit(0);
+		}else {
+			System.out.println("Usuario registrado correctamente");
+		}
+		
+		System.out.println("Registra tu contraseña");
+		contraseña=sc.next();
+		if(contraseña.length()<5) {
+			System.out.println("La contraseña debe ser mayor de 5 caracteres");
+			System.exit(0);
+		}else {
+			for (char i:contraseña.toCharArray()) {
+				if(Character.isDigit(i)) {
+					contieneNumeros=true;
+				}else {
+					contieneNumeros=false;
+				}
+			}
+			if(contieneNumeros==true) {
+				System.out.println("Contraseña registrada correctamente");
+			}else {
+				System.out.println("La contraseña debe tener al menos un dígito numérico");
+				System.exit(0);
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		//Creación de colección HashMap para guardar el registro
+		HashMap<String,String> UsuarioContraseña=new HashMap<>();
+		
+		zona_restringida.registro();
+		
+		//Se guarda el registro del usuario en la colección
+		
+		
+		UsuarioContraseña.put(usuario, contraseña);
+		
+		//Invoco set Map Entry para ver el contenido del hashMap guardado
+		Set<Map.Entry<String, String>> entries=UsuarioContraseña.entrySet();
+		
+		Iterator<Map.Entry<String,String>> lista=entries.iterator();
+		
+		//Con iterator Map.Entry obtengo la clave y el valor guardados en el hashMap
+		while(lista.hasNext()) {
+			
+			 Map.Entry<String, String> next=lista.next();
+			 clave=next.getKey();
+			 valor=next.getValue();
+			 System.out.println(clave+valor);
+		}
+		
+		while(contador!=3) {
+			System.out.println();
+			System.out.println("IDENTIFICACIÓN:");
+			System.out.println("______________");
+			System.out.println();
+			System.out.println("Introduce tu usuario");
+			usuario2=sc.next();
+		
+			System.out.println("Introduce tu contraseña");
+			contraseña2=sc.next();
+		
+				 if((clave.equals(usuario2))&(valor.equals(contraseña2))) {
+					 System.out.println("Tiene acceso al área restringida");
+					 System.exit(0);
+				 }else {
+					 System.out.println("Lo siento pero no tiene aceso al área restringida");
+				 }
+			
+			contador++;
+		}
+		
+	}
+}
