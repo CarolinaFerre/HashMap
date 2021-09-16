@@ -101,3 +101,66 @@ static int contador=0;
 	}
 
 }
+
+
+//OTRA FORMA DE HACERLO
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+public class ProgramaEliza {
+	static Scanner sc=new Scanner(System.in);
+	static HashMap Eliza;
+	static String clave_;
+	static String valor="";
+	static String resultado="";
+	static boolean encontrado=false;
+	static boolean fin=false;
+	
+	public static void crearEliza(HashMap Eliza) {
+		
+		Eliza.put("Hola", "Hola,¿qué tal?");
+		Eliza.put("Encantado", "Encantado de conocerte yo también");
+		Eliza.put("Adiós", "Adiós,espero volverte a ver pronto");
+		Eliza.put("Hora", "Lo siento, no llevo reloj");
+		Eliza.put("Nombre", "Mi nombre es Eliza");
+	}
+	public static void recorrerEliza(HashMap Eliza) {
+		System.out.println("Introduce algo para decir a Eliza");
+		String clave=sc.next();
+		
+		
+		Set<Map.Entry<String,String>>entries=Eliza.entrySet();
+		Iterator<Map.Entry<String, String>>conver=entries.iterator();
+		while(conver.hasNext()) {
+			Map.Entry<String, String>next=conver.next();
+			clave_=next.getKey();
+			if(clave.equals(clave_)) {
+				valor=next.getValue();
+				System.out.println(valor);
+				encontrado=true;
+				  if ( clave.contentEquals("Adiós")){
+	                    fin = true;
+	                }
+				  break;
+			}
+		
+		}
+		if(!encontrado) {
+			
+			System.out.println("Lo siento, no te entiendo");
+		}
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		HashMap<String,String>Eliza=new HashMap<>();
+		ProgramaEliza.crearEliza(Eliza);
+		ProgramaEliza.recorrerEliza(Eliza);
+		
+	}
+
+}
