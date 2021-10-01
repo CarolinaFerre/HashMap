@@ -1,0 +1,143 @@
+
+package colecciones;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.Set;
+/* Ejercicio 14
+Un supermercado de productos ecológicos nos ha pedido hacer un programa
+para vender su mercancía. En esta primera versión del programa se tendrán
+en cuenta los productos que se indican en la tabla junto con su precio. Los
+productos se venden en bote, brick, etc. Cuando se realiza la compra, hay que
+indicar el producto y el número de unidades que se compran, por ejemplo
+“guisantes” si se quiere comprar un bote de guisantes y la cantidad, por
+ejemplo “3” si se quieren comprar 3 botes. La compra se termina con la palabra
+“fin. Suponemos que el usuario no va a intentar comprar un producto que
+no existe. Utiliza un diccionario para almacenar los nombres y precios de los
+productos y una o varias listas para almacenar la compra que realiza el usuario.
+A continuación se muestra una tabla con los productos disponibles y sus
+respectivos precios:
+avena garbanzos tomate jengibre quinoa guisantes
+2,21 2,39 1,59 3,13 4,50 1,60
+Ejemplo:
+Producto: tomate
+Cantidad: 1
+Producto: quinoa
+Cantidad: 2
+Producto: avena
+Cantidad: 1
+Producto: tomate
+Cantidad: 2
+Producto: fin
+Producto Precio Cantidad Subtotal
+---------------------------------
+tomate 1,59 1 1,59
+quinoa 4,50 2 9,00
+avena 2,21 1 2,21
+tomate 1,59 2 3,18
+---------------------------------
+TOTAL: 15,98*/
+public class compraMercado {
+	static Scanner sc=new Scanner (System.in);
+	//Variables estáticas
+	static int cantidad=0;
+	static String producto="";
+	static Double precio;
+	static double subtotal;
+	static double total;
+	
+	
+	public static void pedido(HashMap listaCompra,ArrayList productosElegidos,ArrayList preciosElegidos,ArrayList cantidadTotal, ArrayList subtotalPrecio ) {
+		
+		System.out.println(listaCompra);
+		int contador=0;
+		while(contador<4) {
+		
+		System.out.println("Introduce el producto que quieres comprar");
+		producto=sc.next();
+		System.out.println("Introduce la cantidad");
+		cantidad=sc.nextInt();
+		contador++;
+		Set<Map.Entry<String,Double>> listado=listaCompra.entrySet();
+		Iterator<Map.Entry<String,Double>>listaLectura=listado.iterator();
+		while(listaLectura.hasNext()) {
+			Map.Entry<String, Double>next=listaLectura.next();
+			if(producto.equals(next.getKey())) {
+				System.out.println("Producto: "+producto);
+				productosElegidos.add(producto);
+				precio=next.getValue();
+				System.out.println("Cantidad: "+cantidad);
+				cantidadTotal.add(cantidad);
+				preciosElegidos.add(precio);
+				subtotal=precio*cantidad;
+				total+=subtotal;
+				subtotalPrecio.add(subtotal);
+				
+			}
+		
+		}
+	}
+		System.out.println("Fin");
+		
+	}
+	public static void imprimirProductos(ArrayList productosElegidos) {
+		for(int i=0;i<productosElegidos.size();i++) 
+			
+		System.out.println(productosElegidos.get(i));
+	}
+	public static void imprimirPrecios(ArrayList preciosElegidos) {
+		for(int j=0;j<preciosElegidos.size();j++) {
+			System.out.println(preciosElegidos.get(j)+" ");
+		}
+	}
+	public static void imprimirCantidades(ArrayList cantidadTotal) {
+		for(int k=0;k<cantidadTotal.size();k++) {
+			System.out.println(cantidadTotal.get(k));
+		}
+	}
+	public static void imprimirSubtotal(ArrayList subtotalPrecio) {
+
+		for(int h=0;h<subtotalPrecio.size();h++) {
+			System.out.println(subtotalPrecio.get(h)+" ");
+		}
+	}
+
+	public static void main(String[] args) {
+		//Se crea la lista de la compra y se introducen los datos
+		HashMap<String,Double>listaCompra=new HashMap<>();
+		listaCompra.put("avena", 2.21);
+		listaCompra.put("garbanzos",2.39);
+		listaCompra.put("tomate", 1.59);
+		listaCompra.put("jenjibre", 3.13);
+		listaCompra.put("quinoa", 4.50);
+		listaCompra.put("guisantes", 1.60);
+		//Creamos ArrayList para los productos elegidos
+		ArrayList<String> productosElegidos=new ArrayList<String>();
+		ArrayList<Double> preciosElegidos=new ArrayList<Double>();
+		ArrayList<Integer> cantidadTotal=new ArrayList<Integer>();
+		ArrayList<Double> subtotalPrecio=new ArrayList<Double>();
+		compraMercado.pedido(listaCompra,productosElegidos,preciosElegidos,cantidadTotal,subtotalPrecio);
+		System.out.println("       TICKET DE LA COMPRA        ");
+		System.out.println("__________________________________");
+		System.out.println("PRODUCTOS:");
+		System.out.println("__________________________________");
+		compraMercado.imprimirProductos(productosElegidos);
+		System.out.println("CANTIDADES:");
+		System.out.println("__________________________________");
+		compraMercado.imprimirCantidades(cantidadTotal);
+		System.out.println("PRECIOS:");
+		System.out.println("__________________________________");
+		compraMercado.imprimirPrecios(preciosElegidos);
+		System.out.println("SUBTOTAL:");
+		System.out.println("__________________________________");
+		compraMercado.imprimirSubtotal(subtotalPrecio);
+		System.out.println();
+		System.out.println("__________________________________");
+		System.out.println("TOTAL COMPRA= "+total);
+		System.out.println("__________________________________");
+		}
+	}
+
